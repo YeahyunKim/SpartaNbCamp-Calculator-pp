@@ -17,7 +17,10 @@ public class App {
         //연산 결과 개수가 10개 이상일 때, 결과를 저장할지 여부 확인 변수
         String saveResult;
 
+        String showResultList;
+
         while (continueCalculation == 'y') {
+            System.out.println("============================");
             System.out.println("====== 계산기를 실행합니다 ======");
 
             System.out.print("첫 번째 숫자를 입력하세요: ");
@@ -59,16 +62,34 @@ public class App {
 
             if (resultList.size() > 0) { // resultList에 결과값이 있을 경우
                 System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? remove(삭제) / 아무키 입력(삭제안함): ");
-                input.nextLine(); // \n 개행 처리
+
                 saveResult = input.nextLine();
 
-                if (saveResult == "remove") { // remove 입력 시, 데이터 삭제 조건문
+                if (saveResult.equals("remove")) { // remove 입력 시, 데이터 삭제 조건문
                     resultList.remove(0); // 첫 번쨰 결과값 삭제
                 }
             }
 
             resultList.add(result); // 새로운 결과값 추가
 
+            System.out.print("저장된 연산결과를 조회하시겠습니까? (inquiry(조회) / 아무키 입력(조회안함): ");
+            showResultList = input.nextLine();
+
+            if (showResultList.equals("inquiry")) {
+                System.out.print("저장된 결과 리스트를 불러옵니다. [ ");
+                int index = 0;
+                for (Double value : resultList) {
+                    if (resultList.size()-1 == index) {
+                        System.out.print(value);
+                    } else {
+                        System.out.print(value + " | ");
+                    }
+                    index++;
+                }
+                System.out.print(" ]\n");
+            }
+
+            System.out.println("============================");
             System.out.println("============================");
             System.out.print("더 계산하시겠습니까? y(yes) / n(no) : ");
             continueCalculation = input.next().charAt(0); // y 입력 시 계산기 재실행 , n 입력 시, 종료
