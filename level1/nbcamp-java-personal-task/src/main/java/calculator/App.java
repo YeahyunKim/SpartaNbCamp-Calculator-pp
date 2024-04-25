@@ -1,15 +1,22 @@
 package calculator;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+
+        //연산 결과 result 10개를 저장할 배열 생성
+        double[] resultList = new double[10];
+
+        //연산 결과 개수를 저장할 변수 생성
+        int resultCount = 0;
+
         double result;
         char continueCalculation = 'y';
 
         while (continueCalculation == 'y') {
-
             System.out.println("====== 계산기를 실행합니다 ======");
 
             System.out.print("첫 번째 숫자를 입력하세요: ");
@@ -48,6 +55,12 @@ public class App {
             }
 
             System.out.println("결과: " + result);
+
+            // 결과값을 resultList 배열에 추가
+            resultList[resultCount] = result;
+
+            // 결과 개수 1 증가
+            resultCount++;
             System.out.println("============================");
             System.out.print("더 계산하시겠습니까? y(yes) / n(no) : ");
             continueCalculation = input.next().charAt(0); // y 입력 시 계산기 재실행 , n 입력 시, 종료
