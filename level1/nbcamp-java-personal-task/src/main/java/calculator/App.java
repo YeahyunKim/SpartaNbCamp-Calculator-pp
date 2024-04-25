@@ -17,7 +17,7 @@ public class App {
         char operator = input.next().charAt(0); //사칙연산 기호 값을 입력하고 operator에 저장
 
 
-        // operator의 값에 따라
+        // operator의 값에 따라 연산 실행시키기
         switch (operator) {
             case '+' :
                 result = num1 + num2;
