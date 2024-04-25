@@ -2,19 +2,20 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Objects;
 
 public class App {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
         //연산 결과 result 10개를 저장할 배열 생성
-        double[] resultList = new double[10];
-
-        //연산 결과 개수를 저장할 변수 생성
-        int resultCount = 0;
+        ArrayList<Double> resultList = new ArrayList<Double>();
 
         double result;
         char continueCalculation = 'y';
+
+        //연산 결과 개수가 10개 이상일 때, 결과를 저장할지 여부 확인 변수
+        String saveResult;
 
         while (continueCalculation == 'y') {
             System.out.println("====== 계산기를 실행합니다 ======");
@@ -56,19 +57,17 @@ public class App {
 
             System.out.println("결과: " + result);
 
-            // [if] 결과값 개수가 11개면
-            if (resultCount == 10) {
-                for (int i = 0; i < resultCount; i++) {
-                    resultList[i] = resultList[i+1]; // 배열의 0번째 인덱스에 1번째 인덱스값을 대입, 각각 1씩 증가하여 전체 배열 한칸씩 이동
+            if (resultList.size() > 0) { // resultList에 결과값이 있을 경우
+                System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? remove(삭제) / 아무키 입력(삭제안함): ");
+                input.nextLine(); // \n 개행 처리
+                saveResult = input.nextLine();
+
+                if (saveResult == "remove") { // remove 입력 시, 데이터 삭제 조건문
+                    resultList.remove(0); // 첫 번쨰 결과값 삭제
                 }
-                resultList[resultCount-1] = result; // 10번째 결과값을 resultList 배열에 추가
-
-            // [else] 결과값 개수가 11개가 아니면
-            } else {
-                resultList[resultCount] = result; // 결과값을 resultList 배열에 추가
-
-                resultCount++; // 결과 개수 1 증가
             }
+
+            resultList.add(result); // 새로운 결과값 추가
 
             System.out.println("============================");
             System.out.print("더 계산하시겠습니까? y(yes) / n(no) : ");
@@ -77,6 +76,7 @@ public class App {
             if (continueCalculation == 'n') {
                 System.out.println("====== 계산기를 종료합니다 ======");
             }
+
 
         }
     }
