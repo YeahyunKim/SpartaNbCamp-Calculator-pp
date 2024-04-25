@@ -56,11 +56,20 @@ public class App {
 
             System.out.println("결과: " + result);
 
-            // 결과값을 resultList 배열에 추가
-            resultList[resultCount] = result;
+            // [if] 결과값 개수가 11개면
+            if (resultCount == 10) {
+                for (int i = 0; i < resultCount; i++) {
+                    resultList[i] = resultList[i+1]; // 배열의 0번째 인덱스에 1번째 인덱스값을 대입, 각각 1씩 증가하여 전체 배열 한칸씩 이동
+                }
+                resultList[resultCount-1] = result; // 10번째 결과값을 resultList 배열에 추가
 
-            // 결과 개수 1 증가
-            resultCount++;
+            // [else] 결과값 개수가 11개가 아니면
+            } else {
+                resultList[resultCount] = result; // 결과값을 resultList 배열에 추가
+
+                resultCount++; // 결과 개수 1 증가
+            }
+
             System.out.println("============================");
             System.out.print("더 계산하시겠습니까? y(yes) / n(no) : ");
             continueCalculation = input.next().charAt(0); // y 입력 시 계산기 재실행 , n 입력 시, 종료
