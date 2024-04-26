@@ -57,22 +57,9 @@ public class App {
 
 
             /* [ 모든 연산 결과 조회 영역 ] */
-            System.out.print("저장된 연산결과를 조회하시겠습니까? (inquiry(조회) / 아무키 입력(조회안함): ");
+            System.out.print("저장된 연산결과를 조회하시겠습니까? (inquiry(조회) / 아무키 입력(조회안함)): ");
             showResultList = input.nextLine();
-
-            if (showResultList.equals("inquiry")) {
-                System.out.print("저장된 결과 리스트를 불러옵니다. [ ");
-                int index = 0;
-                for (Double value : calculator.getResultList()) {
-                    if (calculator.getResultList().size()-1 == index) {
-                        System.out.print(value);
-                    } else {
-                        System.out.print(value + " | ");
-                    }
-                    index++;
-                }
-                System.out.print(" ]\n");
-            }
+            calculator.inquiryResults(showResultList);
 
 
             /* [ 추가 계산 여부 확인 영역 ] */

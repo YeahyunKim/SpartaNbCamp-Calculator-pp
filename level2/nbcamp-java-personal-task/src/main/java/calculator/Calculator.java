@@ -20,6 +20,23 @@ public class Calculator {
         this.resultList.remove(0);
     }
 
+    // 조회하기
+    public void inquiryResults(String showResultList) {
+        if (showResultList.equals("inquiry")) {
+            System.out.print("저장된 결과 리스트를 불러옵니다. [ ");
+            int index = 0;
+            for (Double value : resultList) {
+                if (resultList.size()-1 == index) {
+                    System.out.print(value);
+                } else {
+                    System.out.print(value + " | ");
+                }
+                index++;
+            }
+            System.out.print(" ]\n");
+        }
+    }
+
     public double calculate(int num1, int num2, char operator) throws Exception {
 
         // 사칙연산 수행
