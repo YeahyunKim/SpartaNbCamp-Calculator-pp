@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Calculator {
     private ArrayList<Double> resultList;
+    public static final double PI = 3.14; // PI는 변하지않는 상수로 활용해야 하기 때문에 static final를 사용
 
     // 생성자
     public Calculator(ArrayList<Double> resultList) {
