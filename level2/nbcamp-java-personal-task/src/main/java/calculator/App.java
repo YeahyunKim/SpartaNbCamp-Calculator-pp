@@ -8,7 +8,7 @@ public class App {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        Calculator calculator = new Calculator(); // calculator 객체 생성
+        Calculator calculator = new Calculator(new ArrayList<>()); // calculator 객체 생성
 
         char continueCalculation = 'y'; // 계산기 추가 사용 여부
 

@@ -3,7 +3,12 @@ package calculator;
 import java.util.ArrayList;
 
 public class Calculator {
-    private ArrayList<Double> resultList = new ArrayList<>();
+    private ArrayList<Double> resultList;
+
+    // 생성자
+    public Calculator(ArrayList<Double> resultList) {
+        this.resultList = resultList;
+    }
 
     // Getter 메서드
     public ArrayList<Double> getResultList() {
@@ -26,7 +31,7 @@ public class Calculator {
             System.out.print("저장된 결과 리스트를 불러옵니다. [ ");
             int index = 0;
             for (Double value : resultList) {
-                if (resultList.size()-1 == index) {
+                if (resultList.size() - 1 == index) {
                     System.out.print(value);
                 } else {
                     System.out.print(value + " | ");
