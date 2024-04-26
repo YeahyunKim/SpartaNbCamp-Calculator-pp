@@ -3,7 +3,17 @@ package calculator;
 import java.util.ArrayList;
 
 public class Calculator {
-    ArrayList<Double> resultList = new ArrayList<>();
+    private ArrayList<Double> resultList = new ArrayList<>();
+
+    // Getter 메서드
+    public ArrayList<Double> getResultList() {
+        return this.resultList;
+    }
+
+    // Setter 메서드
+    public void setResultList(ArrayList<Double> resultList) {
+        this.resultList = resultList;
+    }
 
     public double calculate(int num1, int num2, char operator) throws Exception {
 

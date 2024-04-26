@@ -7,6 +7,9 @@ import java.util.Objects;
 public class App {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+
+        ArrayList<Double> results = new ArrayList<Double>(); //결과 값을 담을 임시 ArrayList
+
         Calculator calculator = new Calculator(); // calculator 객체 생성
         char continueCalculation = 'y'; // 계산기 추가 사용 여부
 
@@ -24,7 +27,8 @@ public class App {
             char operator = input.next().charAt(0); //사칙연산 기호 값을 입력하고 operator에 저장
 
             try {
-                calculator.resultList.add(calculator.calculate(num1, num2, operator)); // 에러사항이 없을 시, resultList에 결과값 저장
+                results.add(calculator.calculate(num1, num2, operator));
+                calculator.setResultList(results); // 에러사항이 없을 시, resultList에 결과값 저장
             } catch (Exception e) {
                 System.out.println(e.getMessage()); //에러사항이 있을 시, 에러 메세지 출력
             }
