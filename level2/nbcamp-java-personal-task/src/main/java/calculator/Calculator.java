@@ -11,8 +11,13 @@ public class Calculator {
     }
 
     // Setter 메서드
-    public void setResultList(ArrayList<Double> resultList) {
-        this.resultList = resultList;
+    public void setResultList(double result) {
+        this.resultList.add(result);
+    }
+
+    // Remove 첫 번째 결과값 삭제
+    public void removeResult() {
+        this.resultList.remove(0);
     }
 
     public double calculate(int num1, int num2, char operator) throws Exception {
