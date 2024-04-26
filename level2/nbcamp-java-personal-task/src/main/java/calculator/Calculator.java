@@ -17,7 +17,7 @@ public class Calculator {
 
     // Remove 첫 번째 결과값 삭제
     public void removeResult() {
-        this.resultList.remove(0);
+        this.resultList.remove(0); 
     }
 
     public double calculate(int num1, int num2, char operator) throws Exception {
