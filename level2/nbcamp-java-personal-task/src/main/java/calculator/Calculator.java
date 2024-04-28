@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class Calculator {
     private ArrayList<Double> resultList;
+    private ArrayList<Double> circleAreaResultList;
     public static final double PI = 3.14; // PI는 변하지않는 상수로 활용해야 하기 때문에 static final를 사용
 
     // 생성자
-    public Calculator(ArrayList<Double> resultList) {
-        this.resultList = resultList;
+    public Calculator() {
+        this.resultList = new ArrayList<>();
+        this.circleAreaResultList = new ArrayList<>();
     }
 
     // Getter 메서드
@@ -21,15 +23,30 @@ public class Calculator {
         this.resultList.add(result);
     }
 
-    // Remove 첫 번째 결과값 삭제
+    // Getter 메서드
+    public ArrayList<Double> getCircleAreaResultList() {
+        return this.circleAreaResultList;
+    }
+
+    // Setter 메서드
+    public void setCircleAreaResultList(double result) {
+        this.circleAreaResultList.add(result);
+    }
+
+    // Remove 사칙연산 첫 번째 결과값 삭제
     public void removeResult() {
         this.resultList.remove(0);
     }
 
-    // 조회하기
+    // Remove 사칙연산 첫 번째 결과값 삭제
+    public void removeCircleAreaResult() {
+        this.circleAreaResultList.remove(0);
+    }
+
+    // 사칙연산 결과값 조회하기
     public void inquiryResults(String showResultList) {
         if (showResultList.equals("inquiry")) {
-            System.out.print("저장된 결과 리스트를 불러옵니다. [ ");
+            System.out.print("저장된 사칙연산 결과 리스트를 불러옵니다. [ ");
             int index = 0;
             for (Double value : resultList) {
                 if (resultList.size() - 1 == index) {
@@ -41,6 +58,27 @@ public class Calculator {
             }
             System.out.print(" ]\n");
         }
+    }
+
+    // 원의 넓이 결과값 조회하기
+    public void inquiryCircleAreaResults(String showResultList) {
+        if (showResultList.equals("inquiry")) {
+            System.out.print("저장된 원 넓이 리스트를 불러옵니다. [ ");
+            int index = 0;
+            for (Double value : circleAreaResultList) {
+                if (circleAreaResultList.size() - 1 == index) {
+                    System.out.print(value);
+                } else {
+                    System.out.print(value + " | ");
+                }
+                index++;
+            }
+            System.out.print(" ]\n");
+        }
+    }
+    // 원의 넓이 구하기
+    public double calculateCircleArea(int circleRadius) {
+        return circleRadius * circleRadius * PI;
     }
 
     public double calculate(int num1, int num2, char operator) throws Exception {

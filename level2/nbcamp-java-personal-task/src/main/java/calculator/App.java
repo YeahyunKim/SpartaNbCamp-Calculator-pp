@@ -8,7 +8,7 @@ public class App {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        Calculator calculator = new Calculator(new ArrayList<>()); // calculator 객체 생성
+        Calculator calculator = new Calculator(); // calculator 객체 생성
 
         char continueCalculation = 'y'; // 계산기 추가 사용 여부
 
@@ -16,54 +16,88 @@ public class App {
 
         String showResultList; // 결과값 모두 조회 여부 확인 변수
 
-        double result;
+        char calculateType; // 사칙연산을 할지, 원 넓이를 구할지 확인 변수
+
+        int circleRadius;
+
+        double result = 0.0;
 
         /* [ 계산기 실행 시작 ] */
         while (continueCalculation == 'y') {
             System.out.println("============================");
-            System.out.println("====== 계산기를 실행합니다 ======");
-
-            /* [ 정수 2개 사칙연산 기호 입력 영역 ] */
-            System.out.print("첫 번째 숫자를 입력하세요: ");
-            int num1 = input.nextInt(); //첫 번째 숫자 값을 입력하고 num1에 저장
-
-            System.out.print("두 번째 숫자를 입력하세요: ");
-            int num2 = input.nextInt(); //두 번째 숫자 값을 입력하고 num1에 저장
-
-            System.out.print("사칙연산 기호를 입력하세요: ");
-            char operator = input.next().charAt(0); //사칙연산 기호 값을 입력하고 operator에 저장
+            System.out.println("==== [ 계산기를 실행합니다 ] ====");
+            System.out.println("============================");
+            System.out.print("계산종류를 입력해 주세요 1(사칙연산) / 2(원 넓이): ");
+            calculateType = input.next().charAt(0);
             input.nextLine();
 
+            if (calculateType == '1') {
+                System.out.println("=========== 사칙연산 ===========");
 
-            /* [ 연산 결과 리스트에 추가 / 결과 출력 / 예외처리 영역 ] */
-            try {
-                result = calculator.calculate(num1, num2, operator);
-                calculator.setResultList(calculator.calculate(num1, num2, operator)); // 에러사항이 없을 시, resultList에 결과값 저장
-                System.out.println("결과: " + result);
-            } catch (Exception e) {
-                System.out.println(e.getMessage()); //에러사항이 있을 시, 에러 메세지 출력
-            }
+                /* [ 정수 2개 / 사칙연산 기호 입력 영역 ] */
+                System.out.print("첫 번째 숫자를 입력하세요: ");
+                int num1 = input.nextInt(); //첫 번째 숫자 값을 입력하고 num1에 저장
 
+                System.out.print("두 번째 숫자를 입력하세요: ");
+                int num2 = input.nextInt(); //두 번째 숫자 값을 입력하고 num1에 저장
 
-            /* [ 첫 번째 연산 결과 삭제 영역 ] */
-            if (calculator.getResultList().size() > 0) { // resultList에 결과값이 있을 경우
-                System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? remove(삭제) / 아무키 입력(삭제안함): ");
-                saveResult = input.nextLine();
+                System.out.print("사칙연산 기호를 입력하세요: ");
+                char operator = input.next().charAt(0); //사칙연산 기호 값을 입력하고 operator에 저장
+                input.nextLine();
 
-                if (saveResult.equals("remove")) { // remove 입력 시, 데이터 삭제 조건문
-                    calculator.removeResult(); // 첫 번째 결과값 삭제
+                /* [ 연산 결과 리스트에 추가 / 예외처리 영역 ] */
+                try {
+                    result = calculator.calculate(num1, num2, operator);
+                    calculator.setResultList(calculator.calculate(num1, num2, operator)); // 에러사항이 없을 시, resultList에 결과값 저장
+                    System.out.println("결과: " + result);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage()); //에러사항이 있을 시, 에러 메세지 출력
                 }
+
+                /* [ 첫 번째 연산 결과 삭제 영역 ] */
+                if (calculator.getResultList().size() > 0) { // resultList에 결과값이 있을 경우
+                    System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? remove(삭제) / 아무키 입력(삭제안함): ");
+                    saveResult = input.nextLine();
+
+                    if (saveResult.equals("remove")) { // remove 입력 시, 데이터 삭제 조건문
+                        calculator.removeResult(); // 첫 번째 결과값 삭제
+                    }
+                }
+
+                /* [ 원 넓이 연산 결과 조회 영역 ] */
+                System.out.print("저장된 사칙연산을 조회하시겠습니까? inquiry(조회) / 아무키 입력(조회안함): ");
+                showResultList = input.nextLine();
+                calculator.inquiryResults(showResultList);
+
+            } else {
+                System.out.println("========== 원 넓이 ==========");
+
+                /* [ 정수 1개 반지름 입력 영역 ] */
+                System.out.print("반지름 길이를 입력하세요: ");
+                circleRadius = input.nextInt(); //반지름 값을 입력하고 circleRadius에 저장
+                input.nextLine();
+
+                result = calculator.calculateCircleArea(circleRadius);
+                calculator.setCircleAreaResultList(result); // 에러사항이 없을 시, resultList에 결과값 저장
+                System.out.println("결과: " + result);
+
+                /* [ 첫 번째 연산 결과 삭제 영역 ] */
+                if (calculator.getCircleAreaResultList().size() > 0) { // resultList에 결과값이 있을 경우
+                    System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? remove(삭제) / 아무키 입력(삭제안함): ");
+                    saveResult = input.nextLine();
+
+                    if (saveResult.equals("remove")) { // remove 입력 시, 데이터 삭제 조건문
+                        calculator.removeCircleAreaResult(); // 첫 번째 결과값 삭제
+                    }
+                }
+
+                /* [ 원 넓이 연산 결과 조회 영역 ] */
+                System.out.print("저장된 원 넓이를 조회하시겠습니까? inquiry(조회) / 아무키 입력(조회안함): ");
+                showResultList = input.nextLine();
+                calculator.inquiryCircleAreaResults(showResultList);
             }
-
-
-            /* [ 모든 연산 결과 조회 영역 ] */
-            System.out.print("저장된 연산결과를 조회하시겠습니까? (inquiry(조회) / 아무키 입력(조회안함)): ");
-            showResultList = input.nextLine();
-            calculator.inquiryResults(showResultList);
-
 
             /* [ 추가 계산 여부 확인 영역 ] */
-            System.out.println("============================");
             System.out.println("============================");
             System.out.print("더 계산하시겠습니까? y(yes) / n(no) : ");
             continueCalculation = input.next().charAt(0); // y 입력 시 계산기 재실행 , n 입력 시, 종료
