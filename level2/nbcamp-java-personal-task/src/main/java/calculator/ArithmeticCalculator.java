@@ -22,16 +22,16 @@ public class ArithmeticCalculator extends Calculator{
                 this.operator = new AddOperator();
                 break;
             case '-':
-                result = subtractOperator.operate(num1, num2);
+                this.operator = new SubtractOperator();
                 break;
             case '*':
-                result = multiplyOperator.operate(num1, num2);
+                this.operator = new MultiplyOperator();
                 break;
             case '/':
                 if (num2 == 0) {
                     throw new Exception("나숫셈 연산자의 분모는 0이 될 수 없습니다."); // 나눗셈 연산 부모 정수 0일경우 예외 처리
                 } else {
-                    result = divideOperator.operate(num1, num2);
+                    this.operator = new DivideOperator();
                 }
                 break;
             default:
