@@ -34,6 +34,9 @@ public class ArithmeticCalculator extends Calculator{
                     this.operator = new DivideOperator();
                 }
                 break;
+            case '%':
+                this.operator = new ModOperator();
+                break;
             default:
                 throw new Exception("올바른 사칙연산 기호를 입력해 주세요. (+, -, *, /)"); // 사칙연산 기호 예외처리
         }
