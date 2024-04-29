@@ -18,38 +18,19 @@ public class Calculator {
         return this.resultList;
     }
 
-    // Setter 메서드
-    public void setResultList(double result) {
-        this.resultList.add(result);
-    }
-
     // Getter 메서드
     public ArrayList<Double> getCircleAreaResultList() {
         return this.circleAreaResultList;
     }
 
-    // Setter 메서드
-    public void setCircleAreaResultList(double result) {
-        this.circleAreaResultList.add(result);
-    }
 
-    // Remove 사칙연산 첫 번째 결과값 삭제
-    public void removeResult() {
-        this.resultList.remove(0);
-    }
-
-    // Remove 사칙연산 첫 번째 결과값 삭제
-    public void removeCircleAreaResult() {
-        this.circleAreaResultList.remove(0);
-    }
-
-    // 사칙연산 결과값 조회하기
-    public void inquiryResults(String showResultList) {
+    // 결과값 조회하기
+    public void inquiryResults(String showResultList, String calculateType, ArrayList<Double> list) {
         if (showResultList.equals("inquiry")) {
-            System.out.print("저장된 사칙연산 결과 리스트를 불러옵니다. [ ");
+            System.out.print("저장된 " + calculateType + " 결과 리스트를 불러옵니다. [ ");
             int index = 0;
-            for (Double value : resultList) {
-                if (resultList.size() - 1 == index) {
+            for (Double value : list) {
+                if (list.size() - 1 == index) {
                     System.out.print(value);
                 } else {
                     System.out.print(value + " | ");
@@ -59,23 +40,23 @@ public class Calculator {
             System.out.print(" ]\n");
         }
     }
-
-    // 원의 넓이 결과값 조회하기
-    public void inquiryCircleAreaResults(String showResultList) {
-        if (showResultList.equals("inquiry")) {
-            System.out.print("저장된 원 넓이 리스트를 불러옵니다. [ ");
-            int index = 0;
-            for (Double value : circleAreaResultList) {
-                if (circleAreaResultList.size() - 1 == index) {
-                    System.out.print(value);
-                } else {
-                    System.out.print(value + " | ");
-                }
-                index++;
-            }
-            System.out.print(" ]\n");
-        }
-    }
+//
+//    // 원의 넓이 결과값 조회하기
+//    public void inquiryCircleAreaResults(String showResultList, ArrayList<Double> list) {
+//        if (showResultList.equals("inquiry")) {
+//            System.out.print("저장된 원 넓이 리스트를 불러옵니다. [ ");
+//            int index = 0;
+//            for (Double value : circleAreaResultList) {
+//                if (circleAreaResultList.size() - 1 == index) {
+//                    System.out.print(value);
+//                } else {
+//                    System.out.print(value + " | ");
+//                }
+//                index++;
+//            }
+//            System.out.print(" ]\n");
+//        }
+//    }
     // 원의 넓이 구하기
     public double calculateCircleArea(int circleRadius) {
         return circleRadius * circleRadius * PI;
