@@ -1,18 +1,7 @@
 package calculator;
 
 public class ArithmeticCalculator extends Calculator{
-    AddOperator addOperator;
-    SubtractOperator subtractOperator;
-    MultiplyOperator multiplyOperator;
-    DivideOperator divideOperator;
-
-    // 생성자
-    public ArithmeticCalculator() {
-        addOperator = new AddOperator();
-        subtractOperator = new SubtractOperator();
-        multiplyOperator = new MultiplyOperator();
-        divideOperator = new DivideOperator();
-    }
+    Operator operator;
 
     // Setter 메서드
     public void setResultList(double result) {
@@ -30,7 +19,7 @@ public class ArithmeticCalculator extends Calculator{
         double result;
         switch (operator) {
             case '+':
-                result = addOperator.operate(num1, num2);
+                this.operator = new AddOperator();
                 break;
             case '-':
                 result = subtractOperator.operate(num1, num2);
@@ -48,7 +37,7 @@ public class ArithmeticCalculator extends Calculator{
             default:
                 throw new Exception("올바른 사칙연산 기호를 입력해 주세요. (+, -, *, /)"); // 사칙연산 기호 예외처리
         }
-        return result;
+        return result = this.operator.operate(num1, num2);
     }
 
 
