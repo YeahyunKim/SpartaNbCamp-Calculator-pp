@@ -8,8 +8,6 @@ public class App {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        Calculator calculator = new Calculator(); // calculator 객체 생성
-
         ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
         CircleCalculator circleCalculator = new CircleCalculator();
 
@@ -21,7 +19,7 @@ public class App {
 
         char calculateType; // 사칙연산을 할지, 원 넓이를 구할지 확인 변수
 
-        int circleRadius;
+        int circleRadius; // 원 반지름
 
         double result = 0.0;
 
@@ -50,7 +48,7 @@ public class App {
 
                 /* [ 연산 결과 리스트에 추가 / 예외처리 영역 ] */
                 try {
-                    result = calculator.calculate(num1, num2, operator);
+                    result = arithmeticCalculator.calculate(num1, num2, operator);
                     arithmeticCalculator.setResultList(arithmeticCalculator.calculate(num1, num2, operator)); // 에러사항이 없을 시, resultList에 결과값 저장
                     System.out.println("결과: " + result);
                 } catch (Exception e) {
@@ -70,7 +68,7 @@ public class App {
                 /* [ 사칙연산 결과 조회 영역 ] */
                 System.out.print("저장된 사칙연산을 조회하시겠습니까? inquiry(조회) / 아무키 입력(조회안함): ");
                 showResultList = input.nextLine();
-                calculator.inquiryResults(showResultList, "사칙연산", arithmeticCalculator.getResultList());
+                arithmeticCalculator.inquiryResults(showResultList, "사칙연산", arithmeticCalculator.getResultList());
 
             } else {
 
@@ -86,7 +84,7 @@ public class App {
                 System.out.println("결과: " + result);
 
                 /* [ 첫 번째 연산 결과 삭제 영역 ] */
-                if (!circleCalculator.getCircleAreaResultList().isEmpty()) { // circleAreaResultList에 결과값이 있을 경우
+                if (!circleCalculator.getResultList().isEmpty()) { // circleAreaResultList에 결과값이 있을 경우
                     System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? remove(삭제) / 아무키 입력(삭제안함): ");
                     saveResult = input.nextLine();
 
