@@ -45,18 +45,20 @@ public class App {
                 System.out.print("사칙연산 기호를 입력하세요: ");
                 char operator = input.next().charAt(0); //사칙연산 기호 값을 입력하고 operator에 저장
                 input.nextLine();
+                EnumOperator.OperatorType ot = EnumOperator.OperatorType.checkSymbol(operator);
 
                 /* [ 연산 결과 리스트에 추가 / 예외처리 영역 ] */
                 try {
-                    result = arithmeticCalculator.calculate(num1, num2, operator);
-                    arithmeticCalculator.setResultList(arithmeticCalculator.calculate(num1, num2, operator)); // 에러사항이 없을 시, resultList에 결과값 저장
+                    assert ot != null; // null 예외 처리
+                    result = arithmeticCalculator.calculate(num1, num2, ot);
+                    arithmeticCalculator.setResultList(result); // 에러사항이 없을 시, resultList 결과값 저장
                     System.out.println("결과: " + result);
                 } catch (Exception e) {
                     System.out.println(e.getMessage()); //에러사항이 있을 시, 에러 메세지 출력
                 }
 
                 /* [ 첫 번째 연산 결과 삭제 영역 ] */
-                if (!arithmeticCalculator.getResultList().isEmpty()) { // resultList에 결과값이 있을 경우
+                if (!arithmeticCalculator.getResultList().isEmpty()) { // resultList 결과값이 있을 경우
                     System.out.print("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? remove(삭제) / 아무키 입력(삭제안함): ");
                     saveResult = input.nextLine();
 

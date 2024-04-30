@@ -14,34 +14,32 @@ public class ArithmeticCalculator extends Calculator{
     }
 
     //사칙연산 계산
-    public double calculate(int num1, int num2, char operator) throws Exception {
+    public double calculate(int num1, int num2, EnumOperator.OperatorType ot) throws Exception {
 
         double result;
-        switch (operator) {
-            case '+':
+        switch (ot) {
+            case ADD:
                 this.operator = new AddOperator();
                 break;
-            case '-':
+            case SUBTRACT:
                 this.operator = new SubtractOperator();
                 break;
-            case '*':
+            case MULTIPLY:
                 this.operator = new MultiplyOperator();
                 break;
-            case '/':
+            case DIVIDE:
                 if (num2 == 0) {
                     throw new Exception("나숫셈 연산자의 분모는 0이 될 수 없습니다."); // 나눗셈 연산 부모 정수 0일경우 예외 처리
                 } else {
                     this.operator = new DivideOperator();
                 }
                 break;
-            case '%':
+            case MODULO:
                 this.operator = new ModOperator();
                 break;
             default:
-                throw new Exception("올바른 사칙연산 기호를 입력해 주세요. (+, -, *, /)"); // 사칙연산 기호 예외처리
+                throw new Exception("올바른 사칙연산 기호를 입력해 주세요. (+, -, *, /, %)"); // 사칙연산 기호 예외처리
         }
         return result = this.operator.operate(num1, num2);
     }
-
-
 }
