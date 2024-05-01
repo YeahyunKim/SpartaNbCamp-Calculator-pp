@@ -21,14 +21,14 @@ public class App {
 
         int circleRadius; // 원 반지름
 
-        double result = 0.0;
+
 
         /* [ 계산기 실행 시작 ] */
         while (continueCalculation == 'y') {
             System.out.println("============================");
             System.out.println("==== [ 계산기를 실행합니다 ] ====");
             System.out.println("============================");
-            System.out.print("계산종류를 입력해 주세요 1(사칙연산) / 2(원 넓이): ");
+            System.out.print("계산종류를 입력해 주세요 1(사칙연산) / 2(원 넓이) / 3(큰값 조회): ");
             calculateType = input.next().charAt(0);
             input.nextLine();
 
@@ -42,15 +42,14 @@ public class App {
                 System.out.print("두 번째 숫자를 입력하세요: ");
                 int num2 = input.nextInt(); //두 번째 숫자 값을 입력하고 num1에 저장
 
-                System.out.print("사칙연산 기호를 입력하세요: ");
+                System.out.print("연산 기호를 입력하세요: ");
                 char operator = input.next().charAt(0); //사칙연산 기호 값을 입력하고 operator에 저장
                 input.nextLine();
-                EnumOperator.OperatorType ot = EnumOperator.OperatorType.checkSymbol(operator);
+
 
                 /* [ 연산 결과 리스트에 추가 / 예외처리 영역 ] */
                 try {
-                    assert ot != null; // null 예외 처리
-                    result = arithmeticCalculator.calculate(num1, num2, ot);
+                    double result = arithmeticCalculator.calculate(num1, num2, operator);
                     arithmeticCalculator.setResultList(result); // 에러사항이 없을 시, resultList 결과값 저장
                     System.out.println("결과: " + result);
                 } catch (Exception e) {
@@ -68,11 +67,11 @@ public class App {
                 }
 
                 /* [ 사칙연산 결과 조회 영역 ] */
-                System.out.print("저장된 사칙연산을 조회하시겠습니까? inquiry(조회) / 아무키 입력(조회안함): ");
+                System.out.print("저장된 연산을 조회하시겠습니까? inquiry(조회) / 아무키 입력(조회안함): ");
                 showResultList = input.nextLine();
                 arithmeticCalculator.inquiryResults(showResultList, "사칙연산", arithmeticCalculator.getResultList());
 
-            } else {
+            } else if ( calculateType == '2'){
 
                 System.out.println("========== 원 넓이 ==========");
 
@@ -81,7 +80,7 @@ public class App {
                 circleRadius = input.nextInt(); //반지름 값을 입력하고 circleRadius에 저장
                 input.nextLine();
 
-                result = circleCalculator.calculateCircleArea(circleRadius);
+                double result = circleCalculator.calculateCircleArea(circleRadius);
                 circleCalculator.setCircleAreaResultList(result); // 에러사항이 없을 시, circleAreaResultList에 결과값 저장
                 System.out.println("결과: " + result);
 
@@ -99,6 +98,14 @@ public class App {
                 System.out.print("저장된 원 넓이를 조회하시겠습니까? inquiry(조회) / 아무키 입력(조회안함): ");
                 showResultList = input.nextLine();
                 circleCalculator.inquiryResults(showResultList, "원", circleCalculator.getResultList());
+
+            } else if (calculateType == '3') {
+
+                System.out.println("========== 큰 값 조회 ==========");
+                System.out.print("저장된 결과 중 n보다 큰 결과를 출력합니다. 숫자 n을 입력해주세요: ");
+                double test = input.nextDouble();
+                arithmeticCalculator.printGreaterNum(test);
+                input.nextLine();
             }
 
             /* [ 추가 계산 여부 확인 영역 ] */
